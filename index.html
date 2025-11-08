@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ubuntu Travel & Tours – Johannesburg</title>
+  <style>
+    :root{
+      --sky:#4aa3ff;
+      --gold:#f2b52e;
+      --bg:#f7fbff;
+      --text:#1a1a1a;
+      --muted:#5a6b82;
+      --card:#ffffff;
+      --shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; color:var(--text); background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    /* Floating WhatsApp Button */
+    .float-whatsapp{
+      position:fixed;right:22px;bottom:22px;width:58px;height:58px;background:#25D366;border-radius:50%;box-shadow:0 6px 18px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;z-index:1000;}
+    .float-whatsapp svg{width:28px;height:28px}
+    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+    header{position:sticky;top:0;background:white;z-index:50;border-bottom:1px solid #eef0f4}
+    .nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 16px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.05rem}
+    .brand .logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--sky),var(--gold));display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
+    nav ul{list-style:none;display:flex;gap:18px;margin:0;padding:0}
+    nav a{color:#324a7a;font-weight:600;font-size:.95rem}
+    main{overflow:hidden}
+
+    /* Hero */
+    .hero{display:flex;gap:40px;align-items:stretch;min-height:60vh;padding:60px 20px 40px;background:linear-gradient(135deg,#eaf6ff 0%, #ffffff 40%, #f8fbff 100%)}
+    .hero-content{flex:1;max-width:720px}
+    .hero h1{font-size:clamp(2rem,3.2vw+1rem,4rem);line-height:1.08;margin:0 0 14px}
+    .hero p{font-size:1.05rem;color:var(--muted);margin-bottom:20px}
+    .cta{display:inline-flex;gap:12px;align-items:center}
+    .btn{border:0;border-radius:999px;padding:14px 22px;background:var(--sky);color:white;font-weight:700;cursor:pointer;box-shadow:0 6px 14px rgba(74,163,255,.4)}
+    .btn.secondary{background:white;color:var(--sky);border:2px solid var(--sky)}
+    .hero-art{flex:1;min-height:360px;display:flex;align-items:center;justify-content:center}
+    .hero-art img{border-radius:14px;box-shadow:var(--shadow);width:100%;height:auto;object-fit:cover}
+
+    section{padding:64px 20px}
+    .section-title{font-size:1.75rem;margin:0 0 8px}
+    .section-sub{color:var(--muted);margin-bottom:28px}
+
+    /* Packages */
+    .cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+    .card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;border:1px solid #eef1f6}
+    .card img{width:100%;height:180px;object-fit:cover}
+    .card-content{padding:14px}
+    .card h3{margin:6px 0 6px;font-size:1.1rem}
+    .card p{color:var(--muted);font-size:.95rem;margin:0 0 10px}
+    .card-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .ghost{background:#f7fbff;border:1px solid #d8e6fb;color:#0a4a9a}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .testi{background:white;border-radius:12px;padding:18px;border:1px solid #eef1f6;box-shadow:var(--shadow)}
+    .testi p{font-size:.95rem;color:#333}
+    .testi .name{font-weight:700;margin-top:8px}
+    .testi .avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;display:inline-block;margin-right:8px;vertical-align:middle;border:2px solid #e6f0ff}
+
+    /* FAQs */
+    details{border:1px solid #e6eefc;border-radius:8px;padding:10px 12px;margin:8px 0}
+    summary{font-weight:700;cursor:pointer}
+    details[open]{border-color:#d6e4ff}
+    details p{margin:6px 0 0;color:#555}
+
+    /* Contact */
+    .contact{display:grid;grid-template-columns:1.1fr 0.9fr;gap:22px;align-items:start}
+    .contact .info{line-height:1.6}
+    .map{border-radius:12px;overflow:hidden;border:1px solid #e8eefc}
+
+    /* Footer */
+    footer{border-top:1px solid #eef0f4;margin-top:40px;padding:28px 20px;background:white}
+    .footer-grid{max-width:1100px;margin:0 auto;display:flex;gap:40px;flex-wrap:wrap}
+    .links{display:flex;flex-direction:column;gap:8px}
+
+    /* Utilities */
+    .container{max-width:1100px;margin:0 auto}
+    @media (max-width: 1024px){
+      .hero{flex-direction:column;align-items:stretch}
+      .hero-art{order: -1;min-height:260px}
+      .cards{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr 1fr}
+      .contact{grid-template-columns:1fr}
+      .testimonials{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width: 640px){
+      nav ul{display:none}
+      .testimonials{grid-template-columns:1fr}
+      .container{padding:0 12px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating WhatsApp Button -->
+  <a class="float-whatsapp" href="https://wa.me/27825551092" target="_blank" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M24 6C13.1 6 4.5 14.2 4.5 25.2c0 5.5 2.2 10.6 6.1 14.4l-1.7 6.2 6.2-1.8c3.3 1.2 7 1.9 10.8 1.9 10.9 0 19.5-8.2 19.5-19.2S34.9 6 24 6z" fill="#25D366"/>
+      <path d="M29.4 28.4l-3.7-3.7-7.2 7.1-5.3-5.3 7.1-7.2-3.8-3.8L36 25.4l-6.6 6.3z" fill="white"/>
+    </svg>
+  </a>
+
+  <header>
+    <div class="nav container" aria-label="Main Navigation">
+      <div class="brand" aria-label="Ubuntu Travel & Tours Brand">
+        <div class="logo" aria-hidden="true">U</div>
+        <span>Ubuntu Travel & Tours</span>
+      </div>
+      <nav aria-label="Main Navigation Links">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#packages">Packages</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#faqs">FAQs</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="hero" class="hero" aria-label="Hero Section">
+    <div class="hero-content">
+      <h1>Discover Africa, Experience the World.</h1>
+      <p>From Kruger safaris to Dubai getaways, we make every journey unforgettable.</p>
+      <div class="cta" aria-label="Hero CTA Group">
+        <button class="btn" onclick="return false;">Book Your Trip</button>
+        <a class="btn secondary" href="https://wa.me/27825551092" target="_blank" aria-label="Chat on WhatsApp from hero">Chat on WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-label="Hero Visual">
+      <img src="https://im.runware.ai/image/ws/2/ii/1f63e0c8-e471-4cb3-b7a2-a8bead3d0003.jpg" alt="African safari and Johannesburg skyline" />
+    </div>
+  </main>
+
+  <section id="packages" aria-label="Popular Packages">
+    <div class="container">
+      <h2 class="section-title">Popular Packages</h2>
+      <p class="section-sub">Curated escapes across Africa and beyond. Each package includes expert planning, secure bookings, and visa assistance where needed.</p>
+      <div class="cards" id="packages-grid">
+        <!-- Package 1 -->
+        <article class="card" aria-label="Cape Town Escape">
+          <img src="https://im.runware.ai/image/ws/2/ii/b6e223eb-2228-4be7-bb65-025494878d71.jpg" alt="Cape Town scenic coast and Table Mountain">
+          <div class="card-content">
+            <h3>Cape Town Escape – 3 Days, 2 Nights</h3>
+            <p>Experience the iconic Table Mountain, pristine beaches, and vibrant V&A Waterfront with expert planning and seamless logistics.</p>
+            <div class="card-actions">
+              <button class="btn" type="button" aria-label="Book Now Cape Town Escape">Book Now</button>
+              <a class="ghost" href="https://wa.me/27825551092" target="_blank" aria-label="WhatsApp Booking Cape Town">WhatsApp</a>
+            </div>
+          </div>
+        </article>
+        <!-- Package 2 -->
+        <article class="card" aria-label="Victoria Falls Adventure">
+          <img src="https://im.runware.ai/image/ws/2/ii/5c2462ed-027c-4d04-abb5-de2a389edbad.jpg" alt="Victoria Falls misty waterfall">
+          <div class="card-content">
+            <h3>Victoria Falls Adventure – 4 Days</h3>
+            <p>Thunderous falls, adrenaline activities, and luxury lodges, all curated with your comfort in mind.</p>
+            <div class="card-actions">
+              <button class="btn" type="button" aria-label="Book Now Victoria Falls">Book Now</button>
+              <a class="ghost" href="https://wa.me/27825551092" target="_blank" aria-label="WhatsApp Booking Victoria Falls">WhatsApp</a>
+            </div>
+          </div>
+        </article>
+        <!-- Package 3 -->
+        <article class="card" aria-label="Dubai Shopping Experience">
+          <img src="https://im.runware.ai/image/ws/2/ii/5c2462ed-027c-4d04-abb5-de2a389edbad.jpg" alt="Dubai skyline and shopping experience" />
+          <div class="card-content">
+            <h3>Dubai Shopping Experience – 5 Days</h3>
+            <p>Luturous shopping, desert adventures, and world-class dining to elevate your international escape.</p>
+            <div class="card-actions">
+              <button class="btn" type="button" aria-label="Book Now Dubai">Book Now</button>
+              <a class="ghost" href="https://wa.me/27825551092" target="_blank" aria-label="WhatsApp Booking Dubai">WhatsApp</a>
+            </div>
+          </div>
+        </article>
+        <!-- Package 4 -->
+        <article class="card" aria-label="Bali Honeymoon Special">
+          <img src="https://im.runware.ai/image/ws/2/ii/7a59a77d-fa9c-4e9f-954b-f4f4f14e098d.jpg" alt="Tropical beach for Bali honeymoon" />
+          <div class="card-content">
+            <h3>Bali Honeymoon Special – 7 Days</h3>
+            <p>Romantic beaches, lush villas, and blissful sunsets to celebrate love and new adventures.</p>
+            <div class="card-actions">
+              <button class="btn" type="button" aria-label="Book Now Bali Honeymoon">Book Now</button>
+              <a class="ghost" href="https://wa.me/27825551092" target="_blank" aria-label="WhatsApp Booking Bali">WhatsApp</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About Ubuntu Travel & Tours">
+    <div class="container" style="display:flex;gap:28px;align-items:stretch;flex-wrap:wrap">
+      <div style="flex:1;min-width:260px;max-width:720px">
+        <h2 class="section-title">About Ubuntu Travel & Tours</h2>
+        <p class="section-sub">Ubuntu Travel & Tours is a proudly South African company, based in Johannesburg, passionate about connecting travelers to culture, adventure, and comfort. Operating since 2016, we offer personalized travel planning, group tours, and visa assistance. We design experiences that celebrate Africa and the world with trusted local expertise and global reach.</p>
+        <p>We tailor itineraries to your interests—safaris, beach escapes, city breaks, and bespoke group adventures—ensuring every journey feels like a personal story rather than a checklist. Our Visa Assistance team helps you navigate requirements for most destinations, making travel simpler and more enjoyable.</p>
+      </div>
+      <div style="flex:1;min-width:260px;display:flex;justify-content:center;align-items:center">
+        <img src="https://im.runware.ai/image/ws/2/ii/1160d250-9ff6-4c09-a496-fa08e7efd980.jpg" alt="Johannesburg skyline and travel imagery" style="border-radius:12px;max-width:100%;height:auto;box-shadow:var(--shadow);">
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" aria-label="Customer Reviews">
+    <div class="container">
+      <h2 class="section-title">Customer Reviews</h2>
+      <p class="section-sub">What our travelers say about Ubuntu Travel & Tours.</p>
+      <div class="testimonials">
+        <div class="testi" aria-label="Testimonial Lerato">
+          <p>"Our Zanzibar trip was perfectly organized! Can’t wait to book again."</p>
+          <div class="name"><span class="avatar" aria-hidden="true"></span>Lerato M.</div>
+        </div>
+        <div class="testi" aria-label="Testimonial Kabelo">
+          <p>"Professional team and great attention to detail. Highly recommend."</p>
+          <div class="name"><span class="avatar" aria-hidden="true"></span>Kabelo N.</div>
+        </div>
+        <div class="testi" aria-label="Testimonial Thandi">
+          <p>"Seamless planning from start to finish. The kids loved every moment."</p>
+          <div class="name"><span class="avatar" aria-hidden="true"></span>Thandi S.</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;color:var(--muted);font-size:.95rem;display:flex;gap:12px;align-items:center">
+        <span aria-hidden="true">Images:</span>
+        <img src="https://im.runware.ai/image/ws/2/ii/79f230c5-f591-4b3d-95a1-0e170b127c47.jpg" alt="Happy travelers" style="width:60px;height:40px;border-radius:6px;object-fit:cover;border:1px solid #e3eaff;">
+      </div>
+    </div>
+  </section>
+
+  <section id="faqs" aria-label="Frequently Asked Questions">
+    <div class="container">
+      <h2 class="section-title">FAQs</h2>
+      <p class="section-sub">Common questions about our services and travel planning.</p>
+      <div>
+        <details>
+          <summary>Do you assist with visa processing?</summary>
+          <p>Yes, we help clients with visa applications for most destinations, guiding you through requirements and document checklists.</p>
+        </details>
+        <details>
+          <summary>Do you offer group discounts?</summary>
+          <p>Absolutely! We have special rates for groups and corporate packages built into every itinerary.</p>
+        </details>
+        <details>
+          <summary>What payment methods do you accept?</summary>
+          <p>EFT, credit card, and PayFast are available for convenient, secure payments.</p>
+        </details>
+        <details>
+          <summary>Can you customize a travel package?</summary>
+          <p>Yes, all packages can be tailored to your preferences, dates, and destination priorities.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-label="Contact Ubuntu Travel & Tours">
+    <div class="container contact">
+      <div class="info">
+        <h2 class="section-title" style="margin-bottom:8px">Contact Us</h2>
+        <p>Phone: +27 82 555 1092</p>
+        <p>WhatsApp: +27 82 555 1092</p>
+        <p>Email: hello@ubuntutours.co.za</p>
+        <p>Visit us at: 45 Commissioner Street, Johannesburg, South Africa</p>
+      </div>
+      <div class="map" aria-label="Johannesburg Map">
+        <img src="https://im.runware.ai/image/ws/2/ii/1160d250-9ff6-4c09-a496-fa08e7efd980.jpg" alt="Map showing Johannesburg, South Africa" />
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" aria-label="Final Call To Action" style="background:white;">
+    <div class="container" style="text-align:center; padding:40px 20px;">
+      <h2 class="section-title" style="margin-bottom:6px">Ready to start your next journey?</h2>
+      <p class="section-sub" style="margin-top:0; max-width:720px;margin-left:auto;margin-right:auto;">Talk to our travel specialists, and we’ll craft an unforgettable Africa-and-beyond itinerary.</p>
+      <div class="cta" style="justify-content:center;margin-top:14px">
+        <button class="btn" type="button" aria-label="Book Now">Book Your Trip</button>
+        <a class="ghost" href="https://wa.me/27825551092" target="_blank" aria-label="WhatsApp Booking">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer id="footer" aria-label="Footer">
+    <div class="footer-grid container" style="align-items:flex-start;gap:28px;">
+      <div>
+        <strong>Ubuntu Travel & Tours</strong>
+        <p style="margin:6px 0 0; color:var(--muted);">Your Journey, Our Passion.</p>
+      </div>
+      <div class="links" aria-label="Footer quick links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+      <div style="margin-left:auto; text-align:right; color:var(--muted)">
+        made with ❤️ by adorrable.dev
+      </div>
+    </div>
+  </footer>
+
+  <!-- Minimal JS to keep the page production-ready with no external dependencies -->
+  <script>
+    // Smooth scroll for in-page anchors (enhanced UX)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e){
+        const target = document.querySelector(this.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+  </script>
+</body>
+</html>
